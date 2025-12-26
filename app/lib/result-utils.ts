@@ -1,7 +1,7 @@
 import { JSDOM } from 'jsdom';
 import axe from 'axe-core';
-import { NormalizedAxeResult } from '../models/screen-results';
-import { capitalize } from './common-utils';
+import { NormalizedAxeResult } from '@/app/models/screen-results';
+import { capitalize } from '@/app/lib/common-utils';
 
 function getViolationDescription(summary: string) {
   const ariaIndex = summary.indexOf('aria');

@@ -15,7 +15,7 @@ import { Copy, Sparkle } from "lucide-react";
 import { GenerationResult } from "@/app/models/screen-results";
 import { toast } from "sonner";
 
-interface GenerateCodeFixProps {
+interface CodeFixModalProps {
   description: string;
   affectedCode: string;
   generateFix: (description: string, affectedCode: string) => void;
@@ -35,7 +35,7 @@ const Description = ({
 }) => {
   if (isGenerationLoading) {
     return (
-      <div className="space-y-2">
+      <div className="space-y-2" aria-label="Loading Code Fix">
         <Skeleton className="h-4 max-w-[250px]" />
         <Skeleton className="h-[150px] max-w-[500px] rounded-xl" />
       </div>
@@ -52,19 +52,19 @@ const Description = ({
     );
   }
   if (generationResult.reason) {
-    return <span className="text-md">{generationResult.reason}</span>;
+    return <span className="text-md" aria-label="Reason why the code fix could not be generated">{generationResult.reason}</span>;
   }
-  return <span className="text-base text-red-500">Something went wrong! Please try again later</span>;
+  return <span className="text-base text-red-500" aria-label="Error">Something went wrong! Please try again later</span>;
 };
 
-export function GenerateCodeFix({
+export default function CodeFixModal({
   description,
   affectedCode,
   generateFix,
   isGenerationLoading,
   generationResult,
   setGenerationResult,
-}: GenerateCodeFixProps) {
+}: CodeFixModalProps) {
 
   const copyCodeFix = () => {
     navigator.clipboard.writeText(generationResult.fix || '');
@@ -72,7 +72,7 @@ export function GenerateCodeFix({
   }
 
   return (
-    <div className="bg-zinc-50 font-sans dark:text-white dark:bg-black">
+    <section className="bg-zinc-50 font-sans dark:text-white dark:bg-black" aria-label="Generate Code Fix Section">
       <Dialog
         onOpenChange={(open) => {
           if (open) {
@@ -87,10 +87,10 @@ export function GenerateCodeFix({
             <Sparkle /> Generate Fix
           </Button>
         </DialogTrigger>
-        <DialogContent className="min-w-full md:min-w-[800px]">
+        <DialogContent className="min-w-full md:min-w-[800px]" aria-modal>
           <DialogHeader>
             <DialogTitle>Issue</DialogTitle>
-            <DialogDescription className="text-md">
+            <DialogDescription className="text-md" aria-label="Issue Description">
               {description}
             </DialogDescription>
             {!isGenerationLoading && (
@@ -114,10 +114,10 @@ export function GenerateCodeFix({
                 <Copy /> Copy Code Fix
               </Button>
             )}
-            <DialogClose>Cancel</DialogClose>
+            <DialogClose aria-label="Cancel button">Cancel</DialogClose>
           </DialogFooter>
         </DialogContent>
       </Dialog>
-    </div>
+    </section>
   );
 }

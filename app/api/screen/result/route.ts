@@ -2,6 +2,8 @@ import { sanitizeApiParam } from "@/app/lib/common-utils";
 import { runAxe } from "@/app/lib/result-utils";
 import { NextRequest, NextResponse } from "next/server";
 
+// export const dynamic = 'force-static';
+
 export async function GET (request: NextRequest) {
   try {
     const nextUrl = request.nextUrl;
@@ -14,6 +16,8 @@ export async function GET (request: NextRequest) {
       headers: {
         "User-Agent": "a11y-screener/1.0",
       },
+      cache: 'force-cache',
+      next: { revalidate: 3600 }
     });
     const html = await response.text();
     const results = await runAxe(html);

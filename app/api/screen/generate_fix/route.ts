@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { generateObject } from 'ai';
 import { google } from '@ai-sdk/google';
-import { generateMessages } from "../llm_utils";
-import { schema } from "../schema";
+import { generateMessages } from "@/app/api/screen/llm_utils";
+import { schema } from "@/app/api/screen/schema";
 
 export async function POST(request: NextRequest) {
   try {

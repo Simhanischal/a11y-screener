@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react"
-import SiteInput from "../site-input";
+import SiteInput from "@/app/components/site-input";
 import { useRouter } from "next/navigation";
 
 export default function HomeComponent () {
@@ -24,11 +24,11 @@ export default function HomeComponent () {
   }
 
   return (
-    <div className="flex flex-col h-[100vh] justify-center items-center gap-5">
+    <div className="flex flex-col h-[100vh] justify-center items-center gap-10">
       <header>
-        <h1 className="text-center font-mono text-xl lg:text-5xl font-bold text-amber-500">Screen your site for a11y issues</h1>
+        <h1 className="text-center font-mono text-xl lg:text-4xl font-bold text-amber-500">Screen your site for a11y issues</h1>
         <h1 className="text-center font-serif text-sm lg:text-xl">and</h1>
-        <h1 className="text-center font-mono text-xl lg:text-5xl font-bold text-emerald-500">Generate AI powered code fixes</h1>
+        <h1 className="text-center font-mono text-xl lg:text-4xl font-bold text-emerald-500">Generate AI powered code fixes</h1>
       </header>
       <SiteInput
         siteUrl={siteUrl}

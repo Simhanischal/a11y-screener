@@ -29,21 +29,22 @@ export default function SiteInput ({ siteUrl, setSiteUrl, inputError, setInputEr
   }
 
   return (
-    <div className="flex justify-center gap-3">
+    <main className="flex justify-center gap-3">
       <div className="flex flex-col gap-2">
         <Input
-          className="min-w-full md:min-w-[500px]"
+          className="min-w-full md:min-w-[500px] h-[50px]"
           value={siteUrl}
           onChange={handleInputChange}
+          aria-placeholder="Enter your site's URL to start screening for accessibility issues"
         />
         {inputError && (
-          <p className="text-red-500 text-sm font-medium=">{inputError}</p>
+          <p className="text-red-500 text-sm font-medium" role="alert" aria-live="assertive" aria-label="Input Error:">{inputError}</p>
         )}
       </div>
-      <Button disabled={!siteUrl || isScreenButtonLoading} onClick={handleScreen}>
+      <Button className="h-[45px]" disabled={!siteUrl || isScreenButtonLoading} onClick={handleScreen}>
         {isScreenButtonLoading && <Spinner />}
         Screen <ScanText />
       </Button>
-    </div>
+    </main>
   );
 }
