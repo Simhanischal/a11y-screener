@@ -83,7 +83,7 @@ export default function CodeFixModal({
         }}
       >
         <DialogTrigger asChild>
-          <Button className="bg-purple-500 text-white hover:bg-purple-300 hover:text-black">
+          <Button className="bg-violet-500 text-white hover:bg-violet-300 hover:text-black">
             <Sparkle /> Generate Fix
           </Button>
         </DialogTrigger>
