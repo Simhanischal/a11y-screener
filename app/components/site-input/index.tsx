@@ -18,7 +18,6 @@ interface SiteInputProps {
 export default function SiteInput ({ siteUrl, setSiteUrl, inputError, setInputError, handleScreen, isScreenButtonLoading }: SiteInputProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
-    console.log(input)
     if (!input) {
       setSiteUrl('');
       setInputError('URL cannot be empty');
