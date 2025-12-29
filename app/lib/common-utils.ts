@@ -1,13 +1,10 @@
-import { JSDOM } from 'jsdom';
-import createDOMPurify from 'dompurify';
-
 export const capitalize = (input: string) => {
   return input.substring(0, 1).toUpperCase() + input.substring(1);
 }
 
-export const sanitizeApiParam = (param: string) => {
-  const dom = new JSDOM();
-  const { window } = dom;
-  const DOMPurify = createDOMPurify(window);
-  return DOMPurify.sanitize(param);
+export const convertEpochToDateTime = (epoch: number) => {
+  const dateTime = new Date(epoch * 1000);
+  const formattedDate = dateTime.toLocaleDateString(undefined, {dateStyle: 'medium'});
+  const formattedTime = dateTime.toLocaleTimeString(undefined, { timeStyle: 'short' });
+  return `${formattedDate} ${formattedTime}`;
 }

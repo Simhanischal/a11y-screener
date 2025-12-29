@@ -1,8 +1,5 @@
-import { sanitizeApiParam } from "@/app/lib/common-utils";
-import { runAxe } from "@/app/lib/result-utils";
+import { runAxe, sanitizeApiParam } from "@/app/lib/result-utils";
 import { NextRequest, NextResponse } from "next/server";
-
-// export const dynamic = 'force-static';
 
 export async function GET (request: NextRequest) {
   try {
@@ -21,7 +18,6 @@ export async function GET (request: NextRequest) {
     });
     const html = await response.text();
     const results = await runAxe(html);
-    // console.log(results)
     return Response.json({ results });
   } catch (error) {
     let errorMessage = "Something went wrong";
@@ -30,4 +26,4 @@ export async function GET (request: NextRequest) {
     }
     return NextResponse.json({ message: errorMessage }, { status: 500 });
   }
-}
+};

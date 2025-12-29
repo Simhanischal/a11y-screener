@@ -18,6 +18,7 @@ interface SiteInputProps {
 export default function SiteInput ({ siteUrl, setSiteUrl, inputError, setInputError, handleScreen, isScreenButtonLoading }: SiteInputProps) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
+    console.log(input)
     if (!input) {
       setSiteUrl('');
       setInputError('URL cannot be empty');
@@ -28,6 +29,12 @@ export default function SiteInput ({ siteUrl, setSiteUrl, inputError, setInputEr
     }
   }
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === "Enter" && !inputError) {
+      handleScreen();
+    }
+  }
+
   return (
     <main className="flex justify-center gap-3">
       <div className="flex flex-col gap-2">
@@ -35,6 +42,8 @@ export default function SiteInput ({ siteUrl, setSiteUrl, inputError, setInputEr
           className="min-w-full md:min-w-[500px] h-[50px]"
           value={siteUrl}
           onChange={handleInputChange}
+          onKeyDown={handleKeyDown}
+          aria-label="Site URL Input"
           aria-placeholder="Enter your site's URL to start screening for accessibility issues"
         />
         {inputError && (

@@ -1,6 +1,6 @@
 export interface NormalizedAxeResult {
   severity: string;
-  id: string;
+  id: string | number;
   title: string;
   wcag: string[];
   description: string;

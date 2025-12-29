@@ -2,6 +2,7 @@ import { JSDOM } from 'jsdom';
 import axe from 'axe-core';
 import { NormalizedAxeResult } from '@/app/models/screen-results';
 import { capitalize } from '@/app/lib/common-utils';
+import createDOMPurify from 'dompurify';
 
 function getViolationDescription(summary: string) {
   const ariaIndex = summary.indexOf('aria');
@@ -27,17 +28,6 @@ function normalizeAxeResults(axeResult: axe.AxeResults): NormalizedAxeResult[] {
       description: getViolationDescription(violation.nodes[0]?.failureSummary || ''),
       affectedNodes,
     };
-    // const violatedNodeResult: NormalizedAxeResult[] = [];
-    // violation.nodes.forEach(node => {
-    //   if (!affectedNodes.includes(node.html)) {
-    //     violatedNodeResult.push({
-    //       ...baseResult,
-    //       affected_html: node.html,
-    //     });
-    //     affectedNodes.push(node.html);
-    //   }
-    // });
-    // return violatedNodeResult;
     return normalizedValue;
   });
 
@@ -60,4 +50,11 @@ export async function runAxe(html: string) {
   // return results;
   const normalizedResults = normalizeAxeResults(results);
   return normalizedResults;
+}
+
+export const sanitizeApiParam = (param: string) => {
+  const dom = new JSDOM();
+  const { window } = dom;
+  const DOMPurify = createDOMPurify(window);
+  return DOMPurify.sanitize(param);
 }

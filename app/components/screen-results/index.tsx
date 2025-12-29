@@ -137,7 +137,7 @@ export default function ScreenResults({
           aria-label="Violations list"
         >
           {screenResults.map((result) => (
-            <AccordionItem key={result.id} value={result.id}>
+            <AccordionItem key={result.id} value={String(result.id)}>
               <AccordionTrigger
                 onClick={handleCssClass}
                 className={accordionTriggerCssClasses}
@@ -183,7 +183,7 @@ export default function ScreenResults({
                       <InfoPopover noOfElements={result.affectedNodes.length} />
                     )}
                   </p>
-                  <ul style={{ display: "flex", flexDirection: "column" }}>
+                  <ul className="flex flex-col mt-5">
                     {result.affectedNodes.slice(0, 10).map((node) => (
                       <li key={node} className="mb-5 flex gap-5 items-center">
                         <SyntaxHighlighter
