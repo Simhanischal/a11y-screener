@@ -35,7 +35,6 @@ export default async function HistoryResults({
     violations = await prisma.violation.findMany({
       where: { resultId: result?.id },
     });
-    console.log(violations);
   } catch (err) {
     throw new Error(err as string);
   }

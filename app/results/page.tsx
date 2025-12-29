@@ -47,7 +47,6 @@ export default async function Results({
             },
           });
         });
-        console.log("done");
       }
     }
   } catch (err) {

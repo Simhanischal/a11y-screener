@@ -7,7 +7,6 @@ import { schema } from "@/app/api/screen/schema";
 export async function POST(request: NextRequest) {
   try {
     const { issueDescription, affectedHtml } = await request.json();
-    console.log('affectedHtml', affectedHtml);
     if (affectedHtml) {
       const model = google('gemini-2.5-flash');
       const messages = generateMessages({ VIOLATION_DESCRIPTION: issueDescription, VIOLATING_HTML_CODE: affectedHtml });

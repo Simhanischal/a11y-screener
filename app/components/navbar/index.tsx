@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import navbarLogo from '@/app/public/navbar-logo.png'
+import navbarLogo from "@/app/public/navbar-logo.png";
 import { useUser } from "@auth0/nextjs-auth0";
 
 export default function NavBar() {
@@ -23,22 +23,19 @@ export default function NavBar() {
 
   return (
     <nav>
-      <ul className="flex justify-between mt-5 dark:text-white dark:bg-black">
+      <div className="flex justify-between mt-5 dark:text-white dark:bg-black">
         <div className="ml-10">
-          <li>
-            <Link href="/" aria-label="Logout" role="link">
-              <Image
-                src={navbarLogo}
-                alt="Home page logo"
-                role="presentation"
-                width={100}
-                height={100}
-              />
-            </Link>
-          </li>
+          <Link href="/" aria-label="Logout" role="link">
+            <Image
+              src={navbarLogo}
+              alt="Home page logo"
+              width={100}
+              height={100}
+            />
+          </Link>
         </div>
         <div className="flex gap-20">
-          <li className="cursor-pointer">
+          <div className="cursor-pointer">
             {pathname === "/history" ? (
               <Link aria-label="Go to Home page" role="link" href="/">
                 Home
@@ -48,9 +45,9 @@ export default function NavBar() {
                 History
               </Link>
             )}
-          </li>
+          </div>
           {user ? (
-            <li className="cursor-pointer mr-10">
+            <div className="cursor-pointer mr-10">
               <div
                 className="flex items-center gap-2"
                 onClick={() =>
@@ -70,16 +67,16 @@ export default function NavBar() {
                   Logout
                 </Link>
               </div>
-            </li>
+            </div>
           ) : (
-            <li className="cursor-pointe mr-10">
+            <div className="cursor-pointe mr-10">
               <Link href="/auth/login" aria-label="Login" role="link">
                 Login
               </Link>
-            </li>
+            </div>
           )}
         </div>
-      </ul>
+      </div>
     </nav>
   );
 }
