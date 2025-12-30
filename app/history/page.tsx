@@ -9,7 +9,7 @@ export default async function History() {
     const user = session?.user;
     const userDetails = await prisma.user.findUnique({ where: { email: user?.email } });
     const userId = userDetails?.id;
-    const userResults = await prisma.result.findMany({ where: { userId } });
+    const userResults = userId? await prisma.result.findMany({ where: { userId } }) : [];
     const formattedUserResults = userResults.map(result => ({
       ...result, timestamp: convertEpochToDateTime(result.timestamp),
     }));

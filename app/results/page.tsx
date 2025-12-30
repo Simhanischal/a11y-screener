@@ -21,18 +21,28 @@ export default async function Results({
       const jsonResponse = await response.json();
       screenResults = jsonResponse?.results;
       const session = await auth0.getSession();
-      const user = session?.user;
-      if (user) {
-        const userDetails = await prisma.user.findUnique({
-          where: { email: user?.email },
+      const authUser = session?.user;
+      if (authUser && authUser.email && authUser.name) {
+        const dbUserDetails = await prisma.user.findUnique({
+          where: { email: authUser.email },
         });
-        const userId = userDetails?.id;
+        let dbUserId = dbUserDetails?.id;
+        // If the user doesn't exist in DB, create the user in DB
+        if (!dbUserId) {
+          const newDbUser = await prisma.user.create({
+            data: {
+              name: authUser.name,
+              email: authUser.email,
+            },
+          });
+          dbUserId = newDbUser?.id;
+        }
         const timestamp = Math.floor(Date.now() / 1000);
         const newResult = await prisma.result.create({
           data: {
             timestamp,
             siteUrl: url,
-            userId: userId || 0,
+            userId: dbUserId,
           },
         });
         screenResults.forEach(async (result: NormalizedAxeResult) => {
