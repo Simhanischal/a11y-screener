@@ -6,7 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import navbarLogo from "@/app/public/navbar-logo.png";
+import navbarLogo from "@/public/navbar-logo.png";
 import { useUser } from "@auth0/nextjs-auth0";
 
 export default function NavBar() {
@@ -18,13 +18,13 @@ export default function NavBar() {
     if (!expandProfile) {
       return "hidden";
     }
-    return "absolute right-8 top-13 block bg-zinc-500 p-2 rounded-md";
+    return "absolute right-2 md:right-8 top-13 block bg-zinc-500 p-2 rounded-md";
   };
 
   return (
     <nav>
       <div className="flex justify-between mt-5 dark:text-white dark:bg-black">
-        <div className="ml-10">
+        <div className="md:ml-10">
           <Link href="/" aria-label="Logout" role="link">
             <Image
               src={navbarLogo}
@@ -34,7 +34,7 @@ export default function NavBar() {
             />
           </Link>
         </div>
-        <div className="flex gap-20">
+        <div className="flex gap-10 md:gap-20">
           <div className="cursor-pointer">
             {pathname === "/history" ? (
               <Link aria-label="Go to Home page" role="link" href="/">
@@ -47,7 +47,7 @@ export default function NavBar() {
             )}
           </div>
           {user ? (
-            <div className="cursor-pointer mr-10">
+            <div className="cursor-pointer md:mr-10">
               <div
                 className="flex items-center gap-2"
                 onClick={() =>
@@ -69,7 +69,7 @@ export default function NavBar() {
               </div>
             </div>
           ) : (
-            <div className="cursor-pointe mr-10">
+            <div className="cursor-pointe md:mr-10">
               <Link href="/auth/login" aria-label="Login" role="link">
                 Login
               </Link>

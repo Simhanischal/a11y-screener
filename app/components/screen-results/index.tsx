@@ -111,12 +111,12 @@ export default function ScreenResults({
     <div className="flex flex-col justify-center items-center gap-3">
       <header className="flex flex-col items-center justify-content gap-5 mt-10">
         <div className="flex justify-center items-center gap-3">
-          <span
+          <div
             className="border border-solid border-zinc-500 rounded-md text-sm font-medium px-4 py-2"
             aria-label="Site URL"
           >
             {siteUrl}
-          </span>
+          </div>
           <Button
             variant="outline"
             onClick={handleEditUrl}
@@ -126,93 +126,98 @@ export default function ScreenResults({
           </Button>
         </div>
         <h3 className="font-bold text-xl" aria-label="Violations heading">
-          Violations
+          { screenResults.length > 0 ? "Violations" :  "Yay! No Violations found."}
         </h3>
       </header>
-      <main className="border border-solid border-zinc-500 rounded-md text-sm font-medium shadow-xl/3 shadow-red-500 mt-4 px-4 py-2">
-        <Accordion
-          type="single"
-          collapsible
-          className="w-[75vw]"
-          aria-label="Violations list"
-        >
-          {screenResults.map((result) => (
-            <AccordionItem key={result.id} value={String(result.id)}>
-              <AccordionTrigger
-                onClick={handleCssClass}
-                className={accordionTriggerCssClasses}
-              >
-                {result.title}
-              </AccordionTrigger>
-              <AccordionContent className="flex flex-col gap-4 text-balance text-md border-b-3 mt-5">
-                <div className="flex flex-col gap-1">
-                  <h4 className="text-xs text-stone-300">Reason</h4>
-                  <span className="font-medium" aria-label="Violation Reason">
-                    {result.description}
-                  </span>
-                </div>
-                <div className="flex flex-col gap-2">
-                  <h4 className="text-xs text-stone-300">Severity</h4>
-                  <Badge
-                    className={getSeverityStyling(result.severity)}
-                    aria-label="Violation Severity"
-                  >
-                    {result.severity}
-                  </Badge>
-                </div>
-                {result.wcag.length > 0 && (
-                  <div className="flex flex-col gap-2">
-                    <h4 className="text-xs text-stone-300">Tags </h4>
-                    <div className="flex gap-2" aria-label="Violation Tags">
-                      {result.wcag.map((tag) => (
-                        <Badge
-                          className="font-medium"
-                          aria-label="Violation Tag"
-                          key={tag}
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
+      {screenResults.length > 0 && (
+        <main className="border border-solid border-zinc-500 rounded-md text-sm font-medium shadow-xl/3 shadow-red-500 mt-4 px-4 py-2">
+          <Accordion
+            type="single"
+            collapsible
+            className="w-[75vw]"
+            aria-label="Violations list"
+            role="region"
+          >
+            {screenResults.map((result) => (
+              <AccordionItem key={result.id} value={String(result.id)}>
+                <AccordionTrigger
+                  onClick={handleCssClass}
+                  className={accordionTriggerCssClasses}
+                >
+                  {result.title}
+                </AccordionTrigger>
+                <AccordionContent className="flex flex-col gap-4 text-balance text-md border-b-3 mt-5">
+                  <div className="flex flex-col gap-1">
+                    <h4 className="text-xs text-stone-300">Reason</h4>
+                    <span className="font-medium" aria-label="Violation Reason">
+                      {result.description}
+                    </span>
                   </div>
-                )}
-                <section aria-label="Affected HTML Elements Section">
-                  <p className="flex items-center gap-2 text-base font-medium mt-3 cursor-pointer">
-                    Affected Elements
-                    {result.affectedNodes.length > 10 && (
-                      <InfoPopover noOfElements={result.affectedNodes.length} />
-                    )}
-                  </p>
-                  <ul className="flex flex-col mt-5">
-                    {result.affectedNodes.slice(0, 10).map((node) => (
-                      <li key={node} className="mb-5 flex gap-5 items-center">
-                        <SyntaxHighlighter
-                          language="html"
-                          style={dracula}
-                          wrapLines
-                          wrapLongLines
-                          customStyle={{ width: "90%" }}
-                          aria-label="Violated HTML Element"
-                        >
-                          {node}
-                        </SyntaxHighlighter>
-                        <CodeFixModal
-                          description={result.description}
-                          affectedCode={node}
-                          generateFix={generateFix}
-                          isGenerationLoading={isGenerationLoading}
-                          generationResult={generationResult}
-                          setGenerationResult={setGenerationResult}
+                  <div className="flex flex-col gap-2">
+                    <h4 className="text-xs text-stone-300">Severity</h4>
+                    <Badge
+                      className={getSeverityStyling(result.severity)}
+                      aria-label="Violation Severity"
+                    >
+                      {result.severity}
+                    </Badge>
+                  </div>
+                  {result.wcag.length > 0 && (
+                    <div className="flex flex-col gap-2">
+                      <h4 className="text-xs text-stone-300">Tags </h4>
+                      <div className="flex gap-2" aria-label="Violation Tags">
+                        {result.wcag.map((tag) => (
+                          <Badge
+                            className="font-medium"
+                            aria-label="Violation Tag"
+                            key={tag}
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                  <section aria-label="Affected HTML Elements Section">
+                    <p className="flex items-center gap-2 text-base font-medium mt-3 cursor-pointer">
+                      Affected Elements
+                      {result.affectedNodes.length > 10 && (
+                        <InfoPopover
+                          noOfElements={result.affectedNodes.length}
                         />
-                      </li>
-                    ))}
-                  </ul>
-                </section>
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
-      </main>
+                      )}
+                    </p>
+                    <ul className="flex flex-col mt-5">
+                      {result.affectedNodes.slice(0, 10).map((node) => (
+                        <li key={node} className="mb-5 flex gap-5 items-center">
+                          <SyntaxHighlighter
+                            language="html"
+                            style={dracula}
+                            wrapLines
+                            wrapLongLines
+                            customStyle={{ width: "90%" }}
+                            aria-label="Violated HTML Element"
+                          >
+                            {node}
+                          </SyntaxHighlighter>
+                          <CodeFixModal
+                            description={result.description}
+                            affectedCode={node}
+                            generateFix={generateFix}
+                            isGenerationLoading={isGenerationLoading}
+                            generationResult={generationResult}
+                            setGenerationResult={setGenerationResult}
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </main>
+      )}
     </div>
   );
 }
