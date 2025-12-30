@@ -22,7 +22,7 @@ export default function NavBar() {
   };
 
   return (
-    <nav>
+    <nav className="absolute top-0 w-[100vw]">
       <div className="flex justify-between mt-5 dark:text-white dark:bg-black">
         <div className="md:ml-10">
           <Link href="/" aria-label="Logout" role="link">

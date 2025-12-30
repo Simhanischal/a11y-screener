@@ -24,7 +24,7 @@ export default function HomeComponent () {
   }
 
   return (
-    <div className="flex flex-col h-[85vh] justify-center items-center gap-10">
+    <div className="flex flex-col justify-center items-center gap-10">
       <header>
         <h1 className="text-center font-mono text-xl lg:text-4xl font-bold text-amber-500">Screen your site for a11y issues</h1>
         <h1 className="text-center font-serif text-sm lg:text-xl">and</h1>
