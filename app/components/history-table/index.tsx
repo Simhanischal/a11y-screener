@@ -47,7 +47,7 @@ export const columns: ColumnDef<HistoryData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("siteUrl")}</div>,
+    cell: ({ row }) => <div className="truncate" title={row.getValue("siteUrl")}>{row.getValue("siteUrl")}</div>,
     enableSorting: true,
   },
   {
@@ -135,7 +135,7 @@ export default function HistoryTable({ data }: { data: HistoryData[] }) {
             table.getRowModel().rows.map((row) => (
               <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id}>
+                  <TableCell key={cell.id} style={{ maxWidth: cell.column.getSize() }}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}

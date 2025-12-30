@@ -14,20 +14,18 @@ export default async function History() {
       ...result, timestamp: convertEpochToDateTime(result.timestamp),
     }));
     return (
-      <div className="h-[100vh] w-[100vw] font-sans dark:text-white dark:bg-black flex flex-col items-center gap-10">
+      <div className="w-[100vw] font-sans dark:text-white dark:bg-black flex flex-col items-center gap-10 mt-15">
         <header className="mt-10">
           <h3 className="font-bold text-xl" aria-label="History heading">History</h3>
         </header>
-        <main className="min-w-full md:min-w-[50vw]">
+        <main className="min-w-[100vw] md:min-w-[75vw]">
           <HistoryTable data={formattedUserResults}  />
         </main>
       </div>
     );
   } catch {
     return (
-      <>
-        <h3 font-medium text-xl>Something went wrong! Please try again after some time.</h3>
-      </>
+      <h3 font-medium text-xl>Something went wrong! Please try again after some time.</h3>
     )
   }
 }

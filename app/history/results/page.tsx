@@ -39,7 +39,7 @@ export default async function HistoryResults({
     throw new Error(err as string);
   }
   return (
-    <div className="min-h-screen font-sans dark:text-white dark:bg-black">
+    <div className="font-sans dark:text-white dark:bg-black mt-15">
       <ScreenResults siteUrl={siteUrl} screenResults={violations} />
     </div>
   );
