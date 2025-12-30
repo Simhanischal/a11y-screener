@@ -24,6 +24,7 @@ function normalizeAxeResults(axeResult: axe.AxeResults): NormalizedAxeResult[] {
       severity: capitalize(violation.impact || '') || 'Unknown',
       id: violation.id,
       title: violation.help,
+      helpUrl: violation.helpUrl,
       wcag: violation.tags.filter(tag => tag.startsWith('wcag')) ?? '',
       description: getViolationDescription(violation.nodes[0]?.failureSummary || ''),
       affectedNodes,
@@ -47,7 +48,6 @@ export async function runAxe(html: string) {
   const results = await axe.run(window.document, {
     resultTypes: ['violations', 'passes'],
   });
-  // return results;
   const normalizedResults = normalizeAxeResults(results);
   return normalizedResults;
 }

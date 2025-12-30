@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { Severity } from "@/app/constants/common.constants";
 import { Button } from "@/components/ui/button";
-import { ArrowLeft, Info } from "lucide-react";
+import { ArrowLeft, Info, SquareArrowOutUpRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import {
   Popover,
@@ -25,6 +25,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import CodeFixModal from "@/app/components/code-fix-modal";
+import Link from "next/link";
 
 const InfoPopover = ({ noOfElements }: { noOfElements: number }) => (
   <Popover>
@@ -126,7 +127,9 @@ export default function ScreenResults({
           </Button>
         </div>
         <h3 className="font-bold text-xl" aria-label="Violations heading">
-          { screenResults.length > 0 ? "Violations" :  "Yay! No Violations found."}
+          {screenResults.length > 0
+            ? "Violations"
+            : "Yay! No Violations found."}
         </h3>
       </header>
       {screenResults.length > 0 && (
@@ -149,9 +152,21 @@ export default function ScreenResults({
                 <AccordionContent className="flex flex-col gap-4 text-balance text-md border-b-3 mt-5">
                   <div className="flex flex-col gap-1">
                     <h4 className="text-xs text-stone-300">Reason</h4>
-                    <span className="font-medium" aria-label="Violation Reason">
-                      {result.description}
-                    </span>
+                    <div
+                      className="font-medium flex gap-2"
+                      aria-label="Violation Reason"
+                    >
+                      <span>{result.description}</span>
+                      {result.helpUrl && (
+                        <Link
+                          className="text-blue-500 flex items-center gap-1"
+                          href={result.helpUrl}
+                          target="_blank"
+                        >
+                          Learn More <SquareArrowOutUpRight size={15} />
+                        </Link>
+                      )}
+                    </div>
                   </div>
                   <div className="flex flex-col gap-2">
                     <h4 className="text-xs text-stone-300">Severity</h4>

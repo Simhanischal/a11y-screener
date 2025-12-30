@@ -35,6 +35,7 @@ model Result {
 model Violation {
   id            Int       @id @default(autoincrement())
   title         String
+  helpUrl       String?
   description   String
   severity      String
   wcag          String[]

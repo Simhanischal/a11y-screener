@@ -49,6 +49,7 @@ export default async function Results({
           await prisma.violation.create({
             data: {
               title: result.title,
+              helpUrl: result.helpUrl,
               description: result.description,
               severity: result.severity,
               wcag: result.wcag,
@@ -63,7 +64,7 @@ export default async function Results({
     throw new Error(err as string);
   }
   return (
-    <div className="font-sans dark:text-white dark:bg-black mt-15">
+    <div className="font-sans mt-15">
       <ScreenResults siteUrl={url} screenResults={screenResults} />
     </div>
   );
