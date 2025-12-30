@@ -21,11 +21,11 @@ export default function SiteInput ({ siteUrl, setSiteUrl, inputError, setInputEr
     if (!input) {
       setSiteUrl('');
       setInputError('URL cannot be empty');
-    } else {
-      const sanitizedInput = DOMPurify.sanitize(e.target.value);
-      setSiteUrl(sanitizedInput);
-      setInputError('');
+      return;
     }
+    const sanitizedInput = DOMPurify.sanitize(e.target.value);
+    setSiteUrl(sanitizedInput);
+    setInputError('');
   }
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

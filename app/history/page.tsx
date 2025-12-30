@@ -14,7 +14,7 @@ export default async function History() {
       ...result, timestamp: convertEpochToDateTime(result.timestamp),
     }));
     return (
-      <div className="w-[100vw] font-sans dark:text-white dark:bg-black flex flex-col items-center gap-10 mt-15">
+      <div className="w-[100vw] font-sans flex flex-col items-center gap-10 mt-15">
         <header className="mt-10">
           <h3 className="font-bold text-xl" aria-label="History heading">History</h3>
         </header>

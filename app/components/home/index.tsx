@@ -16,6 +16,8 @@ export default function HomeComponent () {
       setInputError('Enter a valid URL');
     } else if (!siteUrl) {
       setInputError('URL cannot be empty');
+    } else if (process.env.NEXT_PUBLIC_BASE_URL && siteUrl.trim().includes(process.env.NEXT_PUBLIC_BASE_URL)) {
+      setInputError("You genius! We won't allow that :)");
     } else {
       setInputError('');
       router.push(`/results?url=${siteUrl}`);
