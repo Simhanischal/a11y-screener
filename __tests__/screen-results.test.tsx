@@ -5,6 +5,7 @@ const results = [
   {
     severity: 'critical',
     id: 'button-name',
+    helpUrl: 'https://www.helpurl.com',
     title: 'Buttons must have discernible text',
     wcag: ['wcag2a', 'wcag412'],
     description: 'aria-label attribute does not exist or is empty',
@@ -13,6 +14,7 @@ const results = [
   {
     severity: 'serioud',
     id: 'link-name',
+    helpUrl: 'https://www.helpurl.com',
     title: 'Links must have discernible text',
     wcag: ['wcag2a', 'wcag244', 'wcag412'],
     description: 'aria-label attribute does not exist or is empty',
@@ -41,7 +43,7 @@ jest.mock('react-syntax-highlighter/dist/esm/styles/hljs/dracula', () => ({
   },
 }));
 
-describe('SiteInput', () => {
+describe('ScreenResults', () => {
   it ('displays the site url correctly', () => {
     render(<ScreenResults {...props} />);
     const siteUrl = screen.getByText(props.siteUrl);

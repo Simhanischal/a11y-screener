@@ -3,8 +3,8 @@ export const capitalize = (input: string) => {
 }
 
 export const convertEpochToDateTime = (epoch: number) => {
-  const dateTime = new Date(epoch * 1000);
-  const formattedDate = dateTime.toLocaleDateString(undefined, {dateStyle: 'medium'});
-  const formattedTime = dateTime.toLocaleTimeString(undefined, { timeStyle: 'short' });
+  const dateTime = new Date(epoch);
+  const formattedDate = dateTime.toLocaleDateString('en-US', { dateStyle: 'medium' });
+  const formattedTime = dateTime.toLocaleTimeString('en-US', { timeStyle: 'short' });
   return `${formattedDate} ${formattedTime}`;
 }

@@ -25,17 +25,19 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
+import { convertEpochToDateTime } from "@/app/lib/common-utils";
 
 interface HistoryData {
   id: number;
   siteUrl: string;
-  timestamp: string;
+  timestamp: bigint;
   userId: number;
 }
 
 export const columns: ColumnDef<HistoryData>[] = [
   {
     accessorKey: "siteUrl",
+    size: 150,
     header: ({ column }) => {
       return (
         <Button
@@ -47,8 +49,9 @@ export const columns: ColumnDef<HistoryData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div className="truncate" title={row.getValue("siteUrl")}>{row.getValue("siteUrl")}</div>,
+    cell: ({ row }) => <div className="text-wrap md:truncate" title={row.getValue("siteUrl")}>{row.getValue("siteUrl")}</div>,
     enableSorting: true,
+    sortingFn: "alphanumeric",
   },
   {
     accessorKey: "timestamp",
@@ -63,8 +66,9 @@ export const columns: ColumnDef<HistoryData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{row.getValue("timestamp")}</div>,
+    cell: ({ row }) => <div>{convertEpochToDateTime(row.getValue("timestamp"))}</div>,
     enableSorting: true,
+    sortingFn: "alphanumeric",
   },
   {
     accessorKey: "id",
@@ -135,7 +139,7 @@ export default function HistoryTable({ data }: { data: HistoryData[] }) {
             table.getRowModel().rows.map((row) => (
               <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
-                  <TableCell key={cell.id} style={{ maxWidth: cell.column.getSize() }}>
+                  <TableCell key={cell.id} className={`md:max-w-[100px]`}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
