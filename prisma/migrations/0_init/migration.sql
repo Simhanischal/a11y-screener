@@ -1,3 +1,6 @@
+-- CreateSchema
+CREATE SCHEMA IF NOT EXISTS "public";
+
 -- CreateTable
 CREATE TABLE "User" (
     "id" SERIAL NOT NULL,
@@ -10,7 +13,7 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Result" (
     "id" SERIAL NOT NULL,
-    "timestamp" INTEGER NOT NULL,
+    "timestamp" BIGINT NOT NULL,
     "siteUrl" TEXT NOT NULL,
     "userId" INTEGER NOT NULL,
 
@@ -21,6 +24,7 @@ CREATE TABLE "Result" (
 CREATE TABLE "Violation" (
     "id" SERIAL NOT NULL,
     "title" TEXT NOT NULL,
+    "helpUrl" TEXT,
     "description" TEXT NOT NULL,
     "severity" TEXT NOT NULL,
     "wcag" TEXT[],
@@ -38,3 +42,4 @@ ALTER TABLE "Result" ADD CONSTRAINT "Result_userId_fkey" FOREIGN KEY ("userId") 
 
 -- AddForeignKey
 ALTER TABLE "Violation" ADD CONSTRAINT "Violation_resultId_fkey" FOREIGN KEY ("resultId") REFERENCES "Result"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+

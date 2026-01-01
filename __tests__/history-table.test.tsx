@@ -1,4 +1,5 @@
 import HistoryTable from "@/app/components/history-table";
+import { convertEpochToDateTime } from "@/app/lib/common-utils";
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 
 const props = {
@@ -6,13 +7,13 @@ const props = {
     {
       id: 1,
       siteUrl: 'https://google.com',
-      timestamp: 'Dec 27, 2025 9:06 PM',
+      timestamp: 1767102302,
       userId: 2,
     },
     {
       id: 2,
       siteUrl: 'https://netflix.com',
-      timestamp: 'Dec 28, 2025 6:34 PM',
+      timestamp: 1767105720,
       userId: 2,
     }
   ]
@@ -30,9 +31,9 @@ describe('HistoryTable', () => {
   it ('renders the correct data in table', () => {
     render(<HistoryTable {...props} />);
     expect(screen.getByText('https://google.com')).toBeInTheDocument();
-    expect(screen.getByText(props.data[0].timestamp)).toBeInTheDocument();
+    expect(screen.getByText(convertEpochToDateTime(props.data[0].timestamp))).toBeInTheDocument();
     expect(screen.getByText('https://netflix.com')).toBeInTheDocument();
-    expect(screen.getByText(props.data[1].timestamp)).toBeInTheDocument();
+    expect(screen.getByText(convertEpochToDateTime(props.data[1].timestamp))).toBeInTheDocument();
     expect(screen.getAllByText('View')[0]).toBeInTheDocument();
   });
 
@@ -42,9 +43,9 @@ describe('HistoryTable', () => {
     fireEvent.change(input, { target: { value: 'google' } });
     await waitFor(() => {
       expect(screen.getByText('https://google.com')).toBeInTheDocument();
-      expect(screen.getByText(props.data[0].timestamp)).toBeInTheDocument();
+      expect(screen.getByText(convertEpochToDateTime(props.data[0].timestamp))).toBeInTheDocument();
       expect(screen.queryByText('https://netflix.com')).not.toBeInTheDocument();
-      expect(screen.queryByText(props.data[1].timestamp)).not.toBeInTheDocument();
+      expect(screen.queryByText(convertEpochToDateTime(props.data[1].timestamp))).not.toBeInTheDocument();
       expect(screen.getAllByText('View')[0]).toBeInTheDocument();
     });
   });

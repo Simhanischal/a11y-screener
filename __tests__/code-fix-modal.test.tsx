@@ -68,7 +68,7 @@ describe('CodeFixModal', () => {
     const generateButton = screen.getByRole('button');
     fireEvent.click(generateButton);
     await waitFor(() => {
-      const errorText = screen.getByText('Something went wrong! Please try again later');
+      const errorText = screen.getByText('Something went wrong! Please try again later.');
       expect(errorText).toBeInTheDocument();
     });
   });

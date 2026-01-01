@@ -54,7 +54,7 @@ const Description = ({
   if (generationResult.reason) {
     return <span className="text-md" aria-label="Reason why the code fix could not be generated">{generationResult.reason}</span>;
   }
-  return <span className="text-base text-red-500" aria-label="Error">Something went wrong! Please try again later</span>;
+  return <span className="text-base text-red-500" aria-label="Error">Something went wrong! Please try again later.</span>;
 };
 
 export default function CodeFixModal({

@@ -25,7 +25,7 @@ model User {
 
 model Result {
   id          Int         @id @default(autoincrement())
-  timestamp   Int        
+  timestamp   BigInt        
   siteUrl     String
   violations  Violation[]
   userId      Int
