@@ -14,15 +14,21 @@ jest.mock('next/navigation', () => {
 
 describe('HomeComponent', () => {
   it("renders the header correctly", () => {
-    render(<HomeComponent />);
-    const heading11 = screen.getByText("Screen your site for a11y issues");
+    render(<HomeComponent url='' />);
+    const heading1 = screen.getByText("Screen your site for a11y issues");
     const heading2 = screen.getByText("Generate AI powered code fixes");
-    expect(heading11).toBeInTheDocument();
+    expect(heading1).toBeInTheDocument();
     expect(heading2).toBeInTheDocument();
   });
 
+  it("displays the site url in input field if present in search params", () => {
+    render(<HomeComponent url='https://google.com' />);
+    const input = screen.getByRole('textbox');
+    expect(input).toHaveDisplayValue('https://google.com');
+  });
+
   it("handles invalid site url", async () => {
-    render(<HomeComponent />);
+    render(<HomeComponent url='' />);
     const input = screen.getByRole('textbox');
     const button = screen.getByRole('button');
     fireEvent.change(input, { target: { value: 'Example' } });
@@ -33,7 +39,7 @@ describe('HomeComponent', () => {
 
   it("handles valid site url", async () => {
     const siteUrl = 'https://a11screener.com';
-    render(<HomeComponent />);
+    render(<HomeComponent url='' />);
     const input = screen.getByRole('textbox');
     const button = screen.getByRole('button');
     fireEvent.change(input, { target: { value: siteUrl } });
