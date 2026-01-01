@@ -35,20 +35,22 @@ const Description = ({
 }) => {
   if (isGenerationLoading) {
     return (
-      <div className="space-y-2" aria-label="Loading Code Fix">
-        <Skeleton className="h-4 max-w-[250px]" />
+      <div className="space-y-5 mt-5" aria-label="Loading Code Fix">
+        <Skeleton className="h-7 max-w-[250px]" />
         <Skeleton className="h-[150px] max-w-[500px] rounded-xl" />
       </div>
     );
   }
   if (generationResult.fix) {
     return (
-      <ReactDiffViewer
-        splitView={false}
-        oldValue={affectedCode}
-        newValue={generationResult.fix}
-        useDarkTheme
-      />
+      <div className="mt-3">
+        <ReactDiffViewer
+          splitView={false}
+          oldValue={affectedCode}
+          newValue={generationResult.fix}
+          useDarkTheme
+        />
+      </div>
     );
   }
   if (generationResult.reason) {
@@ -87,7 +89,7 @@ export default function CodeFixModal({
             <Sparkle /> Generate Fix
           </Button>
         </DialogTrigger>
-        <DialogContent className="min-w-full md:min-w-[800px]" aria-modal>
+        <DialogContent className="min-w-full md:min-w-[800px] bg-gray-900" aria-modal>
           <DialogHeader>
             <DialogTitle>Issue</DialogTitle>
             <DialogDescription className="text-md" aria-label="Issue Description">
