@@ -66,7 +66,7 @@ export const columns: ColumnDef<HistoryData>[] = [
         </Button>
       );
     },
-    cell: ({ row }) => <div>{convertEpochToDateTime(row.getValue("timestamp"))}</div>,
+    cell: ({ row }) => <div>{convertEpochToDateTime(parseInt(row.getValue("timestamp")))}</div>,
     enableSorting: true,
     sortingFn: "alphanumeric",
   },
