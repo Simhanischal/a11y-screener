@@ -8,7 +8,7 @@ const Error = ({ error, reset }: { error: Error; reset: () => void }) => {
   const router = useRouter();
   return (
     <div className="flex flex-col gap-10 justify-center items-center h-screen">
-      <p>{error.message}</p>
+      <p>Something went wrong! Please try again later.</p>
       <div className="flex gap-2 items-center">
         <Button variant="link" onClick={() => router.back()}>
           <ArrowLeft /> Back
