@@ -3,9 +3,10 @@
 import { useState } from "react"
 import SiteInput from "@/app/components/site-input";
 import { useRouter } from "next/navigation";
+import DOMPurify from "dompurify";
 
-export default function HomeComponent () {
-  const [siteUrl, setSiteUrl] = useState('');
+export default function HomeComponent ({ url }: { url: string }) {
+  const [siteUrl, setSiteUrl] = useState(url || '');
   const [inputError, setInputError] = useState('');
   const [isScreenButtonLoading, setIsScreenButtonLoading] = useState(false);
   const router = useRouter();
@@ -20,7 +21,8 @@ export default function HomeComponent () {
       setInputError("You genius! We won't allow that :)");
     } else {
       setInputError('');
-      router.push(`/results?url=${siteUrl}`);
+      const sanitizedSiteUrl = DOMPurify.sanitize(siteUrl);
+      router.push(`/results?url=${sanitizedSiteUrl}`);
     }
     setIsScreenButtonLoading(false);
   }

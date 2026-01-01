@@ -1,6 +1,7 @@
 import { auth0 } from "@/lib/auth0";
 import ScreenResults from "@/app/components/screen-results";
 import { NormalizedAxeResult } from "@/app/models/screen-results";
+import { persistResultsInDb } from "../lib/result-utils";
 
 export default async function Results({
   searchParams,
@@ -22,10 +23,7 @@ export default async function Results({
       const session = await auth0.getSession();
       const authUser = session?.user;
       if (authUser && authUser.email && authUser.name) {
-        fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/screen/result`, {
-          method: "POST",
-          body: JSON.stringify({ results: screenResults, authUser, url }),
-        });
+        await persistResultsInDb(authUser, screenResults, url )
       }
     }
   } catch {

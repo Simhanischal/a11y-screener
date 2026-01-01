@@ -81,7 +81,7 @@ export default function ScreenResults({
   };
 
   const handleEditUrl = () => {
-    router.push("/");
+    router.push(`/?url=${siteUrl}`);
   };
 
   const generateFix = async (
