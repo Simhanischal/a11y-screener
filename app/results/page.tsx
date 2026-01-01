@@ -30,7 +30,7 @@ export default async function Results({
     throw new Error();
   }
   return (
-    <div className="font-sans mt-15">
+    <div className="font-sans">
       <ScreenResults siteUrl={url} screenResults={screenResults} />
     </div>
   );

@@ -110,7 +110,7 @@ export default function ScreenResults({
 
   return (
     <div className="flex flex-col justify-center items-center gap-3">
-      <header className="flex flex-col items-center justify-content gap-5 mt-10">
+      <header className="flex flex-col items-center justify-content gap-5 mt-20">
         <div className="flex justify-center items-center gap-3">
           <div
             className="border border-solid border-zinc-500 rounded-md text-sm font-medium px-4 py-2"

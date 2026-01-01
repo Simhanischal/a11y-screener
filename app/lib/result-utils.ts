@@ -93,18 +93,17 @@ export const persistResultsInDb = async (
         userId: dbUserId,
       },
     });
-    results.forEach(async (result: NormalizedAxeResult) => {
-      await prisma.violation.create({
-        data: {
-          title: result.title,
-          helpUrl: result.helpUrl,
-          description: result.description,
-          severity: result.severity,
-          wcag: result.wcag,
-          affectedNodes: result.affectedNodes,
-          resultId: newResult.id,
-        },
-      });
+    const violationsToCreate = results.map(result => ({
+        title: result.title,
+        helpUrl: result.helpUrl,
+        description: result.description,
+        severity: result.severity,
+        wcag: result.wcag,
+        affectedNodes: result.affectedNodes,
+        resultId: newResult.id,
+    }));
+    await prisma.violation.createMany({
+      data: violationsToCreate,
     });
   } catch {
     throw new Error();
