@@ -15,7 +15,7 @@ A web app to screen your site for accessibility violations and generate AI power
 
 ---
 
-## Table of Contents
+## Table of Contents 📖
 1. Features
 2. Repository Layout
 3. High-Level Architecture
@@ -26,7 +26,7 @@ A web app to screen your site for accessibility violations and generate AI power
 
 ---
 
-## 1  Features
+## 1  Features 🛠️
 1. Fetch accessibility violations for a website 
 2. Holistic view of violations details
 3. AI-generated code fixes for violations (Gemini 2.5 Flash)
@@ -36,7 +36,7 @@ A web app to screen your site for accessibility violations and generate AI power
 
 ---
 
-## 2  Repository Layout
+## 2  Repository Layout 📂
 ```
 a11y-screener/
 ├─__tests__/                     # Unit tests
@@ -55,7 +55,7 @@ a11y-screener/
 
 ---
 
-## 3  High-Level Architecture (Todo)
+## 3  High-Level Architecture 💡
 
 <img width="650" height="249" alt="image" src="https://github.com/user-attachments/assets/b18064f9-83ca-4f15-83f0-8ba3db35f396" />
 
@@ -63,7 +63,7 @@ a11y-screener/
 
 ---
 
-## 4  Development Guide
+## 4  Development Guide 👩🏻‍💻
 
 ### 4.1 Prerequisites
 • Node ≥ 20  
@@ -94,7 +94,7 @@ yarn dev          # http://localhost:3000
 
 ---
 
-## 5  Deployment Guide
+## 5  Deployment Guide 🐳
 
 ### 5.1 CI/CD Overview
 1. Pushing to feature branches triggers Vercel Preview Deployment
@@ -105,7 +105,7 @@ Vercel (`NEXT_PUBLIC_BASE_URL` and `APP_BASE_URL` to Vercel's/custom domain for 
 
 ---
 
-## 7  Contributing & Coding Standards
+## 6  Contributing & Coding Standards 🤜🤛
 1. Write suitable unit tests for the code changes
 2. 🍃  Use conventional commits `feat:`, `fix:`, `docs:` to unlock auto-changelog.  
 3. Contributions are welcome! Feel free to open an issue or submit a pull request if you have a way to improve this project. 
@@ -113,7 +113,7 @@ Vercel (`NEXT_PUBLIC_BASE_URL` and `APP_BASE_URL` to Vercel's/custom domain for 
 
 ---
 
-## 8  License
+## 7  License 📝
 MIT © 2026 – A11y Screener Contributors
 
 ---
