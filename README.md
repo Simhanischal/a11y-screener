@@ -57,9 +57,9 @@ a11y-screener/
 
 ## 3  High-Level Architecture (Todo)
 
-<img width="598" height="249" alt="image" src="https://github.com/user-attachments/assets/b18064f9-83ca-4f15-83f0-8ba3db35f396" />
+<img width="650" height="249" alt="image" src="https://github.com/user-attachments/assets/b18064f9-83ca-4f15-83f0-8ba3db35f396" />
 
-<img width="617" height="385" alt="image" src="https://github.com/user-attachments/assets/f4197405-4043-4049-9be1-052359d625f9" />
+<img width="650" height="385" alt="image" src="https://github.com/user-attachments/assets/f4197405-4043-4049-9be1-052359d625f9" />
 
 ---
 
